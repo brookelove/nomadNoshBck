@@ -1,29 +1,46 @@
 import { Schema, model } from "mongoose";
+import { randomUUID } from "crypto";
 //FEILD LIST: name, description, location, menu items (array), owner (reference to User model), images/videos (array), ratings, reviews
 const foodTruckSchema = new Schema({
+  id: {
+    type: "UUID",
+    default: () => randomUUID(),
+  },
   name: {
     type: String,
-    unique: true,
   },
   description: {
     type: String,
   },
-  menuItems: {
-    type: [menuSchema],
-  },
+  menuItems: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "MenuItem",
+    },
+  ],
   location: {
     type: String,
   },
   owner: {
-    type: [User],
+    type: Schema.Types.ObjectId,
+    ref: "User",
   },
-  posts: {
-    type: [Nosh],
-  },
+  // images and videos are posts
+  posts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Nosh",
+    },
+  ],
   ratings: {
     type: Number,
   },
-  reviews: [Review],
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 const FoodTruck = model("FoodTruck", foodTruckSchema);
 module.exports = FoodTruck;

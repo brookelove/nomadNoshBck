@@ -1,18 +1,16 @@
 import { Schema, model } from "mongoose";
 //FIELD LIST:  follower (reference to User model), following (reference to User model)
-const followSchema = new Schema({
+const commentSchema = new Schema({
   followers: [
     {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
   ],
-  following: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
+  comment: {
+    type: String,
+    require: true,
+  },
 });
-const Follow = model("User", followSchema);
-module.exports = Follow;
+const Comment = model("User", commentSchema);
+module.exports = Comment;
