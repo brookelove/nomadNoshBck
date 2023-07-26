@@ -4,7 +4,7 @@ import { randomUUID } from "crypto";
 const menuItemSchema = new Schema({
   id: {
     type: 'UUID',
-    default: () => randomUUID();
+    default: () => randomUUID()
   },
   name: {
     type: String,
